@@ -17,13 +17,13 @@ BONUS:
 
 """
 
-def prideti_produktą(saldytuvas, produktas, kiekis):
+def prideti_produktą(saldytuvas, produktas, kiekis): #viskas dedasi i vakuma
     if produktas in saldytuvas:
         saldytuvas[produktas] += kiekis
     else:
         saldytuvas[produktas] = kiekis
 
-def isimti_produktą(saldytuvas, produktas, kiekis):
+def isimti_produktą(saldytuvas, produktas, kiekis): #reikia kad po atimties grazintu pakeista saldytuva
     if produktas in saldytuvas:
         if saldytuvas[produktas] >= kiekis:
             saldytuvas[produktas] -= kiekis
@@ -69,6 +69,7 @@ def patikrinti_recepta(saldytuvas, receptas):
 
 saldytuvas = {}
 
+#reikia kad isliktu saldytuve!!!!!!
 prideti_produktą(saldytuvas, "Obuoliai", 5.5)
 prideti_produktą(saldytuvas, "Pienas", 2.3)
 prideti_produktą(saldytuvas, "Morkos", 3.2)
