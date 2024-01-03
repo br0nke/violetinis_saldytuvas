@@ -1,21 +1,3 @@
-""" Komandinio darbo užduotis
-===[ Šaldytuvas ]===
-
-Reikalavimai:
-
-* Šaldytuvo turinys - žodynas, kurio raktas yra produkto pavadinimas, reikšmė - kiekis (float).
-* Pridėti produktą į šaldytuvą. Pridedant egzistuojantį produktą, kiekiai sudedami su esančiais.
-* Išimti produktą iš šaldytuvo. Išimant egzistuojantį produktą, kiekis atitinkamai sumažinamas.
-* Patikrinti, ar reikiamas produkto kiekis yra šaldytuve.
-* Išspausdinti visą šaldytuvo turinį su kiekiais.
-
-BONUS:
-
-* Patikrinti, ar receptas išeina. 
-** Recepto įvedimas vyksta viena eilute, kuri po to išdalinama. Pva.: Sūris: 0.5, Pomidoras: 2, Duona: 0.4
-** Jeigu receptas neišeina, išvardinti kiek ir kokių produktų trūksta.
-
-"""
 def prideti_produkta(saldytuvas, produktas, kiekis = 0):
     if produktas in saldytuvas.keys():
         saldytuvas[produktas] = saldytuvas[produktas] + kiekis
@@ -39,12 +21,15 @@ def isimti_produkta(saldytuvas, pavadinimas):
             print(f'Saldytuve dabar yra: {saldytuvas}')
         elif salyga.lower() == 'ne':
             print(f'Irasykite kieki {pavadinimas} ka norite isimti')
+            #pakeisti irasytike pavadiniomas kieki kuri norite isimti 
             print(f'Saldytuve dabar yra: {saldytuvas}')
             pasalintas_kiekis = float(input())
             saldytuvas[pavadinimas] = saldytuvas[pavadinimas] - pasalintas_kiekis
             print(f'{pasalintas_kiekis} {pavadinimas} buvo issimtas is saldytuvo')
+            #dar vieno elif reiketu kad nebutu neigiamu skaiciu ir programa uzsidarytu arba mestu klaida
     else:
         print('Produkto nera')
+
 
     return saldytuvas
     
@@ -64,15 +49,17 @@ def main(saldytuvas):
         
     while True:
 
+
         print('violetinis saldytuvas')
         print('0: Iseiti')
         print('1: Prideti i saldytuva')
         print('2: Isimti is saldytuvo')
         print('3: Patikrinti ar porduktas yra saldytuve')
+    #porduktas = produktas
         print('4: Parodyti saldytuvo turini')
         print('5: Recepto kurimas')
         print('6: Recepto patikrinimas')
-        choice = input('Pasirinkite')
+        choice = input('Pasirinkite ')
         if choice == '0':
             break
         if choice == '1':
@@ -87,5 +74,18 @@ def main(saldytuvas):
             patikrinti_kieki(saldytuvas, pavadinimas)
         if choice == '4':
             print_saldytuvas(saldytuvas)
-        if  choice == '5':
+        if choice == '5':
             break
+        if choice == '6':
+            break
+
+
+#pasirasom dar salyga, kad veiktu pirmos dalies kodas
+saldytuvas = {}
+print(saldytuvas)
+
+saldytuvas = prideti_produkta(saldytuvas, 'pienas', 1.5)
+patikrinti_kieki(saldytuvas, 'pienas')
+print_saldytuvas(saldytuvas) 
+
+main(saldytuvas)
