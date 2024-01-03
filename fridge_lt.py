@@ -35,7 +35,7 @@ def isimti_produktą(saldytuvas, produktas, kiekis):
     else:
         print("Produktas nerastas šaldytuve.")
         return False
-
+#negrazinam po funkcijos saldytuvo turinio (pagauti saldytuva po vienos funkcijos) 
 def patikrinti_kieki(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas and saldytuvas[produktas] >= kiekis:
         print(f"Produktų {produktas} kiekis šaldytuve yra pakankamas.")
@@ -67,7 +67,7 @@ def patikrinti_recepta(saldytuvas, receptas):
         print("Receptas išeina su turimais produktais.")
 
 saldytuvas = {}
-
+#cia gaunasi loopas kuris eina visada is pradziu nes mes nesustabdome tinkamu laiku
 prideti_produktą(saldytuvas, "Obuoliai", 5.5)
 prideti_produktą(saldytuvas, "Pienas", 2.3)
 prideti_produktą(saldytuvas, "Morkos", 3.2)
