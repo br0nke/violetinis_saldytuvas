@@ -16,8 +16,7 @@ BONUS:
 ** Jeigu receptas neišeina, išvardinti kiek ir kokių produktų trūksta.
 
 """
-
-def prideti_produktą(saldytuvas, produktas, kiekis): #viskas dedasi i vakuma
+def prideti_produktą(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas:
         saldytuvas[produktas] += kiekis
     else:
@@ -36,7 +35,7 @@ def isimti_produktą(saldytuvas, produktas, kiekis): #reikia kad po atimties gra
     else:
         print("Produktas nerastas šaldytuve.")
         return False
-
+#negrazinam po funkcijos saldytuvo turinio (pagauti saldytuva po vienos funkcijos) 
 def patikrinti_kieki(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas and saldytuvas[produktas] >= kiekis:
         print(f"Produktų {produktas} kiekis šaldytuve yra pakankamas.")
@@ -70,6 +69,7 @@ def patikrinti_recepta(saldytuvas, receptas):
 saldytuvas = {}
 
 #reikia kad isliktu saldytuve!!!!!!
+#cia gaunasi loopas kuris eina visada is pradziu nes mes nesustabdome tinkamu laiku
 prideti_produktą(saldytuvas, "Obuoliai", 5.5)
 prideti_produktą(saldytuvas, "Pienas", 2.3)
 prideti_produktą(saldytuvas, "Morkos", 3.2)
@@ -88,3 +88,4 @@ patikrinti_kieki(saldytuvas, "Pienas", 3)
 receptas = "Morkos: 2.0, Kiaušiniai: 4.0, Obuoliai: 3.0, Pienas: 5.0"
 
 patikrinti_recepta(saldytuvas, receptas)
+#PAKEITIMAS

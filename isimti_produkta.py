@@ -12,3 +12,4 @@ def isimti_produktą(saldytuvas, produktas, kiekis):
     else:
         print("Produktas nerastas šaldytuve.")
         return False
+    #PAKEITIMAS
