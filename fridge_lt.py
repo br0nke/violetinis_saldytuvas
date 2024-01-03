@@ -22,6 +22,21 @@ def prideti_produktą(saldytuvas, produktas, kiekis):
     else:
         saldytuvas[produktas] = kiekis
 
+def patikrinti_recepta(saldytuvas, receptas):
+        truksta_produktu = {}
+        recepto_produktai = dict(item.split(':') for item in receptas.split(','))   
+        for produktas, reikalingas_kiekis in recepto_produktai.items():
+            reikalingas_kiekis = float(reikalingas_kiekis)
+        if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
+            truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
+
+        if truksta_produktu:
+            print("Receptas neišeina. Trūksta šių produktų:")
+        for produktas, trukstamas_kiekis in truksta_produktu.items():
+            print(f"{produktas}: trūksta {trukstamas_kiekis}")
+        else:
+            print("Receptas išeina su turimais produktais.")
+        
 def isimti_produktą(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas:
         if saldytuvas[produktas] >= kiekis:
@@ -55,6 +70,9 @@ saldytuvas = {}
 prideti_produktą(saldytuvas, "Obuoliai", 5.5)
 prideti_produktą(saldytuvas, "Pienas", 2.3)
 prideti_produktą(saldytuvas, "Obuoliai", 3.2)
+
+receptas = "Sūris: 0.5, Pomidoras: 2, Duona: 0.4"
+saldytuvas.patikrinti_recepta(receptas)
 
 ispausdinti_turini(saldytuvas)
 
