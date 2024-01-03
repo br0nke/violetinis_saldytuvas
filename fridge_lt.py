@@ -16,6 +16,8 @@ BONUS:
 ** Jeigu receptas neišeina, išvardinti kiek ir kokių produktų trūksta.
 
 """
+#float yra pvz duona = 1 (kg) arba 1.5 
+# susigalvoti funkcijos pavadinima saldytuvas_pilnas
 def prideti_produktą(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas:
         saldytuvas[produktas] += kiekis
