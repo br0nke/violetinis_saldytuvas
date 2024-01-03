@@ -50,7 +50,7 @@ def isimti_produktą(saldytuvas, produktas, kiekis):
     else:
         print("Produktas nerastas šaldytuve.")
         return False
-
+#negrazinam po funkcijos saldytuvo turinio (pagauti saldytuva po vienos funkcijos) 
 def patikrinti_kieki(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas and saldytuvas[produktas] >= kiekis:
         print(f"Produktų {produktas} kiekis šaldytuve yra pakankamas.")
@@ -62,14 +62,31 @@ def patikrinti_kieki(saldytuvas, produktas, kiekis):
 def ispausdinti_turini(saldytuvas):
     print("Šaldytuvo turinys:")
     for produktas, kiekis in saldytuvas.items():
-        print(f"{produktas}: {kiekis:.2f} vnt.")
+        print(f"{produktas}: {kiekis:.2f} kg")
 
-# Pavyzdys naudojant funkcijas su float kiekiais
+def patikrinti_recepta(saldytuvas, receptas):
+    truksta_produktu = {}
+    recepto_produktai = dict(item.split(':') for item in receptas.split(','))
+
+    for produktas, reikalingas_kiekis in recepto_produktai.items():
+        reikalingas_kiekis = float(reikalingas_kiekis)
+        if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
+            truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
+    if truksta_produktu:
+        print("Receptui reikia: ", receptas)
+        print("Receptas neišeina. Trūksta šių produktų:")
+        for produktas, trukstamas_kiekis in truksta_produktu.items():
+            print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
+    else:
+        print(receptas)
+        print("Receptas išeina su turimais produktais.")
+
 saldytuvas = {}
-
+#cia gaunasi loopas kuris eina visada is pradziu nes mes nesustabdome tinkamu laiku
 prideti_produktą(saldytuvas, "Obuoliai", 5.5)
 prideti_produktą(saldytuvas, "Pienas", 2.3)
-prideti_produktą(saldytuvas, "Obuoliai", 3.2)
+prideti_produktą(saldytuvas, "Morkos", 3.2)
+prideti_produktą(saldytuvas, "Burokai", 13.2)
 
 receptas = "Sūris: 0.5, Pomidoras: 2, Duona: 0.4"
 saldytuvas.patikrinti_recepta(receptas)
@@ -83,3 +100,8 @@ ispausdinti_turini(saldytuvas)
 
 patikrinti_kieki(saldytuvas, "Obuoliai", 1)
 patikrinti_kieki(saldytuvas, "Pienas", 3)
+
+receptas = "Morkos: 2.0, Kiaušiniai: 4.0, Obuoliai: 3.0, Pienas: 5.0"
+
+patikrinti_recepta(saldytuvas, receptas)
+#PAKEITIMAS
