@@ -86,3 +86,4 @@ patikrinti_kieki(saldytuvas, "Pienas", 3)
 receptas = "Morkos: 2.0, Kiaušiniai: 4.0, Obuoliai: 3.0, Pienas: 5.0"
 
 patikrinti_recepta(saldytuvas, receptas)
+#PAKEITIMAS

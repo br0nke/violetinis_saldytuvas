@@ -4,3 +4,5 @@ def prideti_produktą(saldytuvas, produktas, kiekis):
         saldytuvas[produktas] += kiekis
     else:
         saldytuvas[produktas] = kiekis
+    #PAKEITIMAS
+    

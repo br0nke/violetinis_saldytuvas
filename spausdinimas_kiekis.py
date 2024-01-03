@@ -11,3 +11,4 @@ def ispausdinti_turini(saldytuvas):
     print("Šaldytuvo turinys:")
     for produktas, kiekis in saldytuvas.items():
         print(f"{produktas}: {kiekis:.2f} kg")
+#PAKEITIMAS

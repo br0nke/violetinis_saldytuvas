@@ -13,3 +13,4 @@ def patikrinti_recepta(saldytuvas, receptas):
             print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
     else:
         print("Receptas išeina su turimais produktais.")
+        #PAKEITIMAS
