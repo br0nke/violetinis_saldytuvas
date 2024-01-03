@@ -16,13 +16,13 @@ BONUS:
 ** Jeigu receptas neišeina, išvardinti kiek ir kokių produktų trūksta.
 
 """
-def prideti_produktą(saldytuvas, produktas, kiekis):
+def prideti_produkta(saldytuvas, produktas, kiekis):
     if produktas in saldytuvas:
         saldytuvas[produktas] += kiekis
     else:
         saldytuvas[produktas] = kiekis
 
-def isimti_produktą(saldytuvas, produktas, kiekis): #reikia kad po atimties grazintu pakeista saldytuva
+def isimti_produkta(saldytuvas, produktas, kiekis): #reikia kad po atimties grazintu pakeista saldytuva
     if produktas in saldytuvas:
         if saldytuvas[produktas] >= kiekis:
             saldytuvas[produktas] -= kiekis
@@ -70,15 +70,15 @@ saldytuvas = {}
 
 #reikia kad isliktu saldytuve!!!!!!
 #cia gaunasi loopas kuris eina visada is pradziu nes mes nesustabdome tinkamu laiku
-prideti_produktą(saldytuvas, "Obuoliai", 5.5)
-prideti_produktą(saldytuvas, "Pienas", 2.3)
-prideti_produktą(saldytuvas, "Morkos", 3.2)
-prideti_produktą(saldytuvas, "Burokai", 13.2)
+prideti_produkta(saldytuvas, "Obuoliai", 5.5)
+prideti_produkta(saldytuvas, "Pienas", 2.3)
+prideti_produkta(saldytuvas, "Morkos", 3.2)
+prideti_produkta(saldytuvas, "Burokai", 13.2)
 
 ispausdinti_turini(saldytuvas)
 
-isimti_produktą(saldytuvas, "Pienas", 1.2)
-isimti_produktą(saldytuvas, "Obuoliai", 2.8)
+isimti_produkta(saldytuvas, "Pienas", 1.2)
+isimti_produkta(saldytuvas, "Obuoliai", 2.8)
 
 ispausdinti_turini(saldytuvas)
 
