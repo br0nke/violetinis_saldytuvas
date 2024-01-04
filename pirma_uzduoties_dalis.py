@@ -49,21 +49,24 @@ def print_saldytuvas(saldytuvas):
 
 def patikrinti_recepta(saldytuvas, receptas):
     truksta_produktu = {}
-    reikalinga_receptui = input('Iveskite savo recepta: Iveskite produkta ir kieki')
-    recepto_produktai = dict(item.split(':') for item in reikalinga_receptui.split(','))
-#cia reikia dabaigti papildoma uzduoti!!!
-    for produktas, reikalingas_kiekis in recepto_produktai.items():
-        reikalingas_kiekis = float(reikalingas_kiekis)
-        if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
-            truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
+    reikalinga_receptui = dict(item.split(': ') for item in receptas.split(', '))
+    for produktas, reikalingas_kiekis_str in reikalinga_receptui.items():
+        reikalingas_kiekis = float(reikalingas_kiekis_str)
+        if produktas in saldytuvas:
+            trukstamas_kiekis = reikalingas_kiekis - saldytuvas[produktas]
+            if trukstamas_kiekis > 0:
+                truksta_produktu[produktas] = trukstamas_kiekis
+        else:
+            truksta_produktu[produktas] = reikalingas_kiekis
+        
     if truksta_produktu:
-        print("Receptui reikia: ", receptas)
-        print("Receptas neišeina. Trūksta šių produktų:")
+        print('Truksta siu produktu: ')
         for produktas, trukstamas_kiekis in truksta_produktu.items():
-            print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
+            print(f'{produktas}: {trukstamas_kiekis}')
     else:
-        print(receptas)
-        print("Receptas išeina su turimais produktais.")
+        print('Receptas iseina')
+
+    
 
     return saldytuvas
 
@@ -95,7 +98,13 @@ def main(saldytuvas):
         if choice == '4':
             print_saldytuvas(saldytuvas)
         if choice == '5':
-            break
+            receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)")
+            patikrinti_recepta(saldytuvas, receptas)
+        else:
+            print("Klaida! Iveskite meniu skaiciu")
+            
+          
+
 
 
 #pasirasom dar salyga, kad veiktu pirmos dalies kodas
