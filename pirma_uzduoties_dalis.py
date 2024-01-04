@@ -1,3 +1,4 @@
+
 def prideti_produkta(saldytuvas, produktas, kiekis = 0):
     if produktas in saldytuvas.keys():
         saldytuvas[produktas] = saldytuvas[produktas] + kiekis
@@ -20,13 +21,14 @@ def isimti_produkta(saldytuvas, pavadinimas):
             print(f'Produktas {pavadinimas} buvo isimtas is saldytuvo')
             print(f'Saldytuve dabar yra: {saldytuvas}')
         elif salyga.lower() == 'ne':
-            print(f'Irasykite kieki {pavadinimas} ka norite isimti')
-            #pakeisti irasytike pavadiniomas kieki kuri norite isimti 
-            print(f'Saldytuve dabar yra: {saldytuvas}')
-            pasalintas_kiekis = float(input())
-            saldytuvas[pavadinimas] = saldytuvas[pavadinimas] - pasalintas_kiekis
-            print(f'{pasalintas_kiekis} {pavadinimas} buvo issimtas is saldytuvo')
-            #dar vieno elif reiketu kad nebutu neigiamu skaiciu ir programa uzsidarytu arba mestu klaida
+            print(f'Įveskite kiekį {pavadinimas}, kurį norite išimti: ')
+            norimas_kiekis = float(input())
+            if norimas_kiekis > saldytuvas[pavadinimas]:
+                print('Norimas kiekis virsija turima kieki')
+            else:
+                saldytuvas[pavadinimas] -= norimas_kiekis
+                print(f'{norimas_kiekis} {pavadinimas} buvo isimtas is saldytuvo')
+                print(f'Saldytuve dabar yra: {saldytuvas}')
     else:
         print('Produkto nera')
 
@@ -45,6 +47,26 @@ def print_saldytuvas(saldytuvas):
         print(f'* {key} : {value}')
 #cia yra uzduoties sprendimas be saldytuvo turinio ir be papildomos uzduoties
 
+def patikrinti_recepta(saldytuvas, receptas):
+    truksta_produktu = {}
+    reikalinga_receptui = input('Iveskite savo recepta: Iveskite produkta ir kieki')
+    recepto_produktai = dict(item.split(':') for item in reikalinga_receptui.split(','))
+#cia reikia dabaigti papildoma uzduoti!!!
+    for produktas, reikalingas_kiekis in recepto_produktai.items():
+        reikalingas_kiekis = float(reikalingas_kiekis)
+        if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
+            truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
+    if truksta_produktu:
+        print("Receptui reikia: ", receptas)
+        print("Receptas neišeina. Trūksta šių produktų:")
+        for produktas, trukstamas_kiekis in truksta_produktu.items():
+            print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
+    else:
+        print(receptas)
+        print("Receptas išeina su turimais produktais.")
+
+    return saldytuvas
+
 def main(saldytuvas):
         
     while True:
@@ -54,11 +76,9 @@ def main(saldytuvas):
         print('0: Iseiti')
         print('1: Prideti i saldytuva')
         print('2: Isimti is saldytuvo')
-        print('3: Patikrinti ar porduktas yra saldytuve')
-    #porduktas = produktas
+        print('3: Patikrinti ar produktas yra saldytuve')
         print('4: Parodyti saldytuvo turini')
-        print('5: Recepto kurimas')
-        print('6: Recepto patikrinimas')
+        print('5: Recepto patikrinimas')
         choice = input('Pasirinkite ')
         if choice == '0':
             break
@@ -75,8 +95,6 @@ def main(saldytuvas):
         if choice == '4':
             print_saldytuvas(saldytuvas)
         if choice == '5':
-            break
-        if choice == '6':
             break
 
 
