@@ -20,8 +20,7 @@ def isimti_produkta(saldytuvas, pavadinimas):
             print(f'Produktas {pavadinimas} buvo isimtas is saldytuvo')
             print(f'Saldytuve dabar yra: {saldytuvas}')
         elif salyga.lower() == 'ne':
-            print(f'Irasykite kieki {pavadinimas} ka norite isimti')
-            #pakeisti irasytike pavadiniomas kieki kuri norite isimti 
+            print(f'Irasykite kieki {pavadinimas} kiek norite isimti')
             print(f'Saldytuve dabar yra: {saldytuvas}')
             pasalintas_kiekis = float(input())
             saldytuvas[pavadinimas] = saldytuvas[pavadinimas] - pasalintas_kiekis
@@ -29,7 +28,6 @@ def isimti_produkta(saldytuvas, pavadinimas):
             #dar vieno elif reiketu kad nebutu neigiamu skaiciu ir programa uzsidarytu arba mestu klaida
     else:
         print('Produkto nera')
-
 
     return saldytuvas
     
@@ -50,12 +48,11 @@ def main(saldytuvas):
     while True:
 
 
-        print('violetinis saldytuvas')
+        print('--- violetinis saldytuvas ---')
         print('0: Iseiti')
         print('1: Prideti i saldytuva')
         print('2: Isimti is saldytuvo')
-        print('3: Patikrinti ar porduktas yra saldytuve')
-    #porduktas = produktas
+        print('3: Patikrinti ar produktas yra saldytuve')
         print('4: Parodyti saldytuvo turini')
         print('5: Recepto kurimas')
         print('6: Recepto patikrinimas')
