@@ -51,20 +51,24 @@ def patikrinti_recepta():
     recepto_produktai = dict(item.split(':') for item in receptas_input.split(','))
 
     truksta_produktu = {}
-
-    for produktas, reikalingas_kiekis in recepto_produktai.items():
-        reikalingas_kiekis = float(reikalingas_kiekis)
-        if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
-            truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
-
+    reikalinga_receptui = dict(item.split(': ') for item in receptas.split(', '))
+    for produktas, reikalingas_kiekis_str in reikalinga_receptui.items():
+        reikalingas_kiekis = float(reikalingas_kiekis_str)
+        if produktas in saldytuvas:
+            trukstamas_kiekis = reikalingas_kiekis - saldytuvas[produktas]
+            if trukstamas_kiekis > 0:
+                truksta_produktu[produktas] = trukstamas_kiekis
+        else:
+            truksta_produktu[produktas] = reikalingas_kiekis
+        
     if truksta_produktu:
-        print("Receptui reikia: ", receptas_input)
-        print("Receptas neišeina. Trūksta šių produktų:")
+        print('Truksta siu produktu: ')
         for produktas, trukstamas_kiekis in truksta_produktu.items():
-            print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
+            print(f'{produktas}: {trukstamas_kiekis}')
     else:
-        print(receptas_input)
-        print("Receptas išeina su turimais produktais.")
+        print('Receptas iseina')
+
+    
 
 # Call the function to test
 patikrinti_recepta()
@@ -97,8 +101,13 @@ def main(saldytuvas):
         if choice == '4':
             print_saldytuvas(saldytuvas)
         if choice == '5':
-            receptas_input = input("Įveskite recepto produktus ir kiekius (pvz., produktas1:kiekis1, produktas2:kiekis2): ")
-            patikrinti_recepta(saldytuvas, receptas_input)
+            receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)")
+            patikrinti_recepta(saldytuvas, receptas)
+        else:
+            print("Klaida! Iveskite meniu skaiciu")
+            
+          
+
 
 
 #pasirasom dar salyga, kad veiktu pirmos dalies kodas
