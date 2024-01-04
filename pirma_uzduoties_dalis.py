@@ -1,4 +1,3 @@
-
 def prideti_produkta(saldytuvas, produktas, kiekis = 0):
     if produktas in saldytuvas.keys():
         saldytuvas[produktas] = saldytuvas[produktas] + kiekis
@@ -46,25 +45,29 @@ def print_saldytuvas(saldytuvas):
         print(f'* {key} : {value}')
 #cia yra uzduoties sprendimas be saldytuvo turinio ir be papildomos uzduoties
 
-def patikrinti_recepta(saldytuvas, receptas):
+def patikrinti_recepta():
+    # Get user input for the recipe
+    receptas_input = input("Įveskite recepto produktus ir kiekius (pvz., produktas1:kiekis1, produktas2:kiekis2): ")
+    recepto_produktai = dict(item.split(':') for item in receptas_input.split(','))
+
     truksta_produktu = {}
-    reikalinga_receptui = input('Iveskite savo recepta: Iveskite produkta ir kieki')
-    recepto_produktai = dict(item.split(':') for item in reikalinga_receptui.split(','))
-#cia reikia dabaigti papildoma uzduoti!!!
+
     for produktas, reikalingas_kiekis in recepto_produktai.items():
         reikalingas_kiekis = float(reikalingas_kiekis)
         if produktas not in saldytuvas or saldytuvas[produktas] < reikalingas_kiekis:
             truksta_produktu[produktas] = reikalingas_kiekis - saldytuvas.get(produktas, 0)
+
     if truksta_produktu:
-        print("Receptui reikia: ", receptas)
+        print("Receptui reikia: ", receptas_input)
         print("Receptas neišeina. Trūksta šių produktų:")
         for produktas, trukstamas_kiekis in truksta_produktu.items():
             print(f"{produktas}: trūksta {trukstamas_kiekis:.2f} kg")
     else:
-        print(receptas)
+        print(receptas_input)
         print("Receptas išeina su turimais produktais.")
 
-    return saldytuvas
+# Call the function to test
+patikrinti_recepta()
 
 def main(saldytuvas):
         
@@ -94,7 +97,8 @@ def main(saldytuvas):
         if choice == '4':
             print_saldytuvas(saldytuvas)
         if choice == '5':
-            break
+            receptas_input = input("Įveskite recepto produktus ir kiekius (pvz., produktas1:kiekis1, produktas2:kiekis2): ")
+            patikrinti_recepta(saldytuvas, receptas_input)
 
 
 #pasirasom dar salyga, kad veiktu pirmos dalies kodas
