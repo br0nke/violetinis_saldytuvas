@@ -104,12 +104,10 @@ def main(saldytuvas):
             receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)")
             patikrinti_recepta(saldytuvas, receptas)
         else:
+            not choice == (0, 1, 2, 3, 4, 5)
             print("Klaida! Iveskite meniu skaiciu")
-            
           
-
-
-
+          
 #pasirasom dar salyga, kad veiktu pirmos dalies kodas
 saldytuvas = {}
 print(saldytuvas)
