@@ -1,5 +1,5 @@
-from product import Product
-from recipe import Recipe
+from .product import Product
+from .recipe import Recipe
 
 class Fridge:
     def __init__(self):
