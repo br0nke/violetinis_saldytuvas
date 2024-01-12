@@ -1,51 +1,45 @@
-
-def prideti_produkta(saldytuvas, produktas, kiekis = 0):
+def prideti_produkta(saldytuvas, produktas, kiekis=0):
     if produktas in saldytuvas.keys():
-        saldytuvas[produktas] = saldytuvas[produktas] + kiekis
-        print(f'{kiekis} sio {produktas} buvo pridetas i saldytuva')
-        print(saldytuvas)
+        saldytuvas[produktas] += kiekis
+        print(f'{kiekis} {produktas} buvo pridėtas į šaldytuvą')
     else:
         saldytuvas[produktas] = kiekis
-        print(f'{kiekis} sio {produktas} buvo pridetas i saldytuva')
-        print(saldytuvas)
+        print(f'{kiekis} {produktas} buvo pridėtas į šaldytuvą')
 
     return saldytuvas
 
 def isimti_produkta(saldytuvas, pavadinimas):
-
     if pavadinimas in saldytuvas.keys():
-        print(f'Ar noretumete istrinti visus {pavadinimas} is saldytuvo?')
-        salyga = input('taip/ne   ')
+        print(f'Ar norite ištrinti visus {pavadinimas} iš šaldytuvo?')
+        salyga = input('taip/ne: ')
         if salyga.lower() == 'taip':
             del saldytuvas[pavadinimas]
-            print(f'Produktas {pavadinimas} buvo isimtas is saldytuvo')
-            print(f'Saldytuve dabar yra: {saldytuvas}')
+            print(f'Produktas {pavadinimas} buvo išimtas iš šaldytuvo')
+            print(f'Šaldytuve dabar yra: {saldytuvas}')
         elif salyga.lower() == 'ne':
             print(f'Įveskite kiekį {pavadinimas}, kurį norite išimti: ')
             norimas_kiekis = float(input())
             if norimas_kiekis > saldytuvas[pavadinimas]:
-                print('Norimas kiekis virsija turima kieki')
+                print('Norimas kiekis viršija turimą kiekį')
             else:
                 saldytuvas[pavadinimas] -= norimas_kiekis
-                print(f'{norimas_kiekis} {pavadinimas} buvo isimtas is saldytuvo')
-                print(f'Saldytuve dabar yra: {saldytuvas}')
+                print(f'{norimas_kiekis} {pavadinimas} buvo išimtas iš šaldytuvo')
+                print(f'Šaldytuve dabar yra: {saldytuvas}')
     else:
-        print('Produkto nera')
-
+        print('Produkto nėra')
 
     return saldytuvas
-    
+
 def patikrinti_kieki(saldytuvas, pavadinimas):
     if pavadinimas in saldytuvas.keys():
-        print(f"Produktas {pavadinimas} yra saldytuve")
-        print(f'Yra {saldytuvas[pavadinimas]} {pavadinimas} saldytuve')
+        print(f"Produktas {pavadinimas} yra šaldytuve")
+        print(f'Yra {saldytuvas[pavadinimas]} {pavadinimas} šaldytuve')
     else:
-        print(f"Produktas {pavadinimas} nera saldytuve")
+        print(f"Produktas {pavadinimas} nėra šaldytuve")
 
 def print_saldytuvas(saldytuvas):
     for key, value in saldytuvas.items():
         print(f'* {key} : {value}')
-#cia yra uzduoties sprendimas be saldytuvo turinio ir be papildomos uzduoties
 
 def patikrinti_recepta(saldytuvas, receptas):
     truksta_produktu = {}
@@ -60,59 +54,50 @@ def patikrinti_recepta(saldytuvas, receptas):
             truksta_produktu[produktas] = reikalingas_kiekis
         
     if truksta_produktu:
-        print('Truksta siu produktu: ')
+        print('Trūksta šių produktų:')
         for produktas, trukstamas_kiekis in truksta_produktu.items():
             print(f'{produktas}: {trukstamas_kiekis}')
     else:
-        print('Receptas iseina')
-
-    
+        print('Receptas išeina')
 
     return saldytuvas
 
 def main(saldytuvas):
-        
     while True:
-
-
-        print('violetinis saldytuvas')
-        print('0: Iseiti')
-        print('1: Prideti i saldytuva')
-        print('2: Isimti is saldytuvo')
-        print('3: Patikrinti ar produktas yra saldytuve')
-        print('4: Parodyti saldytuvo turini')
-        print('5: Recepto patikrinimas')
-        choice = input('Pasirinkite ')
+        print('---Violetinis šaldytuvas---')
+        print('0: Išeiti')
+        print('1: Pridėti į šaldytuvą')
+        print('2: Išimti iš šaldytuvo')
+        print('3: Patikrinti ar produktas yra šaldytuve')
+        print('4: Parodyti šaldytuvo turinį')
+        print('5: Patikrinti receptą')
+        choice = input('Pasirinkite: ')
         if choice == '0':
             break
         if choice == '1':
-            produktas = input('Koki produkta noretumete prideti?: ')
-            kiekis = float(input('Koki kieki noretumete prideti?: '))
+            produktas = input('Kokį produktą norėtumėte pridėti?: ')
+            kiekis = float(input('Kokį kiekį norėtumėte pridėti?: '))
             saldytuvas = prideti_produkta(saldytuvas, produktas, kiekis)
         if choice == '2':
-            pavadinimas = input('Koki produkta noretumete issimti?: ')
+            pavadinimas = input('Kokį produktą norėtumėte išimti?: ')
             saldytuvas = isimti_produkta(saldytuvas, pavadinimas)
         if choice == '3':
-            pavadinimas = input('Kokio produkto ieskote?: ')
+            pavadinimas = input('Kokio produkto ieškote?: ')
             patikrinti_kieki(saldytuvas, pavadinimas)
         if choice == '4':
             print_saldytuvas(saldytuvas)
-        elif choice == '5':
-            receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)")
+        if choice == '5':
+            receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)): ")
             patikrinti_recepta(saldytuvas, receptas)
         else:
-            print("Klaida! Iveskite meniu skaiciu")
+            print("Klaida! Įveskite meniu pasirinkimą")
             
-          
 
-
-
-#pasirasom dar salyga, kad veiktu pirmos dalies kodas
 saldytuvas = {}
 print(saldytuvas)
 
 saldytuvas = prideti_produkta(saldytuvas, 'pienas', 1.5)
 patikrinti_kieki(saldytuvas, 'pienas')
-print_saldytuvas(saldytuvas) 
+print_saldytuvas(saldytuvas)
 
 main(saldytuvas)
