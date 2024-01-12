@@ -1,4 +1,3 @@
-
 def prideti_produkta(saldytuvas, produktas, kiekis = 0):
     if produktas in saldytuvas.keys():
         saldytuvas[produktas] = saldytuvas[produktas] + kiekis
@@ -97,20 +96,18 @@ def main(saldytuvas):
             patikrinti_kieki(saldytuvas, pavadinimas)
         if choice == '4':
             print_saldytuvas(saldytuvas)
-        elif choice == '5':
+        if choice == '5':
+            #kad perkelti i kita eilute ivedima (arba paaiskinima kazkiek atitraukti)
             receptas = input("Įveskite receptą (Pvz.: produktas1: kiekis1(skaicius), produktas2: kiekis2(skaicius)")
             patikrinti_recepta(saldytuvas, receptas)
-        else:
-            print("Klaida! Iveskite meniu skaiciu")
+
             
           
 
-
-
-#pasirasom dar salyga, kad veiktu pirmos dalies kodas
 saldytuvas = {}
 print(saldytuvas)
 
+#testas ar viskas gerai su pridejimu produkt
 saldytuvas = prideti_produkta(saldytuvas, 'pienas', 1.5)
 patikrinti_kieki(saldytuvas, 'pienas')
 print_saldytuvas(saldytuvas) 
